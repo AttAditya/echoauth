@@ -1,0 +1,34 @@
+name: "Run EchoAuth Sync"
+description: "Sync Emails through EchoAuth Service"
+branding:
+  icon: "mail"
+  color: "white"
+inputs:
+  MAIL_SERVER:
+    description: "Mail server address"
+    required: true
+  EMAIL:
+    description: "Email address to use"
+    required: true
+  PASSWORD:
+    description: "Email account password"
+    required: true
+  REDIS_URL:
+    description: "Redis database URL"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    - run: |
+        pip install -r requirements.txt
+        python main.py
+      shell: bash
+      env:
+        MAIL_SERVER: ${{ inputs.MAIL_SERVER }}
+        EMAIL: ${{ inputs.EMAIL }}
+        PASSWORD: ${{ inputs.PASSWORD }}
+        REDIS_URL: ${{ inputs.REDIS_URL }}
