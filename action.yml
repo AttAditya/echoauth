@@ -22,7 +22,7 @@ runs:
     - uses: actions/checkout@v3
       name: "Clone EchoAuth Repository"
       with:
-        repository: "EchoAuth/EchoAuth"
+        repository: "AttAditya/echoauth"
 
     - uses: actions/setup-python@v4
       name: "Set up Python 3.11"
