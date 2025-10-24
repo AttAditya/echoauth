@@ -20,12 +20,21 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+      name: "Clone EchoAuth Repository"
+      with:
+        repository: "EchoAuth/EchoAuth"
+
     - uses: actions/setup-python@v4
+      name: "Set up Python 3.11"
       with:
         python-version: "3.11"
-    - run: |
-        pip install -r requirements.txt
-        python main.py
+    
+    - name: "Install Dependencies"
+      run: python -m pip install -r requirements.txt
+      shell: bash
+    
+    - name: "Run Sync"
+      run: python main.py
       shell: bash
       env:
         MAIL_SERVER: ${{ inputs.MAIL_SERVER }}
